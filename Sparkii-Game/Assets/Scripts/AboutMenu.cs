@@ -90,8 +90,10 @@ public class AboutMenu : MonoBehaviour
 			case 1: 
 				gameText = 
 				"This game is loosely based off the store associate experience.\n" + 
-				"Although store associates do not hand pick items for the customer, Walmart does strive to create a culture when the customer can truly save money and live better.\n" + 
-				"The Walmart culture is one of high performance, and it is how we live out our values. These four values are \n" + 
+				"Although store associates do not hand pick items for the customer, Walmart does strive to create a culture \n" + 
+				"where the customer can truly save money and live better.\n" + 
+				"The Walmart culture is one of high performance, and it is how we live out our values. \n" + 
+				"These four values are \n" + 
 				" - Service to the Customer \n" + 
 				" - Respect for the Individual \n" +   
 				" - Strive for Excellence \n" + 

@@ -10,17 +10,18 @@ public class GameMenu : MonoBehaviour
 	public Button pauseButton; 
 	public Button playButton; 
 	public Button exitButton; 
+	//public Canvas pausedCanvas; 
+	public Button yesButton; 
+	public Button noButton; 
 	public Text gameText; 
 	
 	void Update(){
 		if (Input.GetKeyDown(KeyCode.Escape)){
 			if (isGamePaused)
 			{
-				gameText.gameObject.SetActive(false); 
 				Resume(); 
 			} else 
 			{
-				gameText.gameObject.SetActive(true); 
 				Pause(); 
 			}
 		} 
@@ -28,42 +29,62 @@ public class GameMenu : MonoBehaviour
 	
 	public void Resume()
 	{
-		pauseButton.gameObject.SetActive(true); 
-		playButton.gameObject.SetActive(false); 
-		Time.timeScale = 1f; 
-		isGamePaused = false; 
+		if (gameText.text.Contains("Win"))
+		{
+			SceneManager.LoadScene(0); 
+		} else if (gameText.text.Contains("Over"))
+		{
+			SceneManager.LoadScene(1); 
+		} else
+		{	
+			gameText.gameObject.SetActive(false); 
+			pauseButton.gameObject.SetActive(true); 
+			playButton.gameObject.SetActive(false); 
+			Time.timeScale = 1f; 
+			isGamePaused = false; 
+		}
 	} 
 	
 	public void Pause()
 	{
 		Time.timeScale = 0f; //freezes game 
 		isGamePaused = true; 
+		gameText.gameObject.SetActive(true); 
 		gameText.text = "Paused"; 
 		pauseButton.gameObject.SetActive(false); 
 		playButton.gameObject.SetActive(true); 
 	} 
 	
-	public void ExitGame(){
-		Time.timeScale = 0f; //freezes game 
-		isGamePaused = true; 
-		gameText.text = "Are you sure you want to leave?"; 
+	public void ExitGame()
+	{
+		if (gameText.text.Contains("Win"))
+		{
+			SceneManager.LoadScene(0); 
+		} else 
+		{
+			Time.timeScale = 0f; //freezes game 
+			isGamePaused = true; 
+			pauseButton.gameObject.SetActive(false); 
+			playButton.gameObject.SetActive(true); 
+			gameText.gameObject.SetActive(true); 
+			gameText.fontSize = 50; 
+			gameText.text = "Are you sure you want to leave?"; 
+		} 
+		
 	} 
 	
-	/* 
-	public void Yes(){
+	
+	public void Yes()
+	{
 		SceneManager.LoadScene(0); 
 		Time.timeScale = 1f;
 		isGamePaused = false; 
 	} 
 	
 	public void No(){
-		Time.timeScale = 1f;
-		isGamePaused = false; 
+		noButton.gameObject.SetActive(false); 
 	} 
-	*/ 
 	
-	void setAllButtonsFalse(){
-		
-	} 
+	
 }
 
